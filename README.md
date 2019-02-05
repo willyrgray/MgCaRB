@@ -28,8 +28,11 @@ The citation for MgCaRB is Gray and Evans, 2019, Paleoceanography.
 
 A Matlab script is available from David Evans' GitHub page.
 
+
 References
 
 Bereiter et al., 2015, Geophysical Research Letters, DOI: 10.1002/2014GL061957
+
 Spratt and Lisiecki, 2016, Climate of the Past, DOI: 10.5194/cp-12-1079/2016
+
 Toggweiler 1999, Paleoceanography 14, 571-588 
