@@ -1,0 +1,138 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf200
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPS-BoldMT;\f1\fmodern\fcharset0 CourierNewPSMT;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red6\green0\blue135;\red158\green0\blue3;\red62\green62\blue62;
+\red0\green0\blue0;\red181\green118\blue12;\red11\green66\blue19;}
+{\*\expandedcolortbl;;\cssrgb\c2500\c8500\c60000;\cssrgb\c69000\c7500\c0;\cssrgb\c31200\c30900\c30900;
+\cssrgb\c0\c0\c0;\cssrgb\c76500\c53500\c3500;\cssrgb\c2000\c32000\c9500;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww12980\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\b\fs24 \cf0 MgCaRBv1 QUICKSTART (using R) 
+\f1\b0 \
+\
+MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity. The correction for pH is made with either boron isotopes (if available) or atmospheric CO2. \
+\
+Open the file called 
+\f0\b MgCaRBv1.R 
+\f1\b0 using R\
+\
+You need to make sure you have the 'seacarb' package installed. To install run: 
+\f2\fs19\fsmilli9750 \cf2 install.packages(\cf3 'seacarb'\cf2 ,\cf4  \cf5 repos\cf2 =\cf3 'https://cloud.r-project.org'\cf2 ,\cf4  \cf5 dependencies\cf2 =\cf6 TRUE\cf2 )
+\f1\fs24 \cf0 \
+This only needs to be done once. \
+\
+\
+At the start you need to load in two functions(the source code for these functions is given in the MgCaRB.pCO2.R and MgCaRB.d11B.R files):\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf2 load(\cf3 'MgCaRB.pCO2.Rdata'\cf2 ) \cf4 #load the pCO2 function \
+\cf2 load(\cf3 'MgCaRB.d11B.Rdata'\cf2 ) \cf4 #load the d11B function 
+\f1\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 \
+if you are using pCO2 use the 
+\f0\b MgCaRB.pCO2
+\f1\b0  function\
+if you are using boron isotopes use the 
+\f0\b MgCaRB.d11B 
+\f1\b0 function \
+\
+In both the pCO2 and d11B functions you need to specify which species calibration to use. There are several options:\
+'grbw' - G. ruber (white)\
+'tsac' - T. sacculifer\
+'gbul' - G. bulloides\
+'ouni' - O. universa\
+'generic' - a generic equation\
+'grbw_gray2018' - the Gray et al., 2018 G. ruber (white) equation\
+\
+The default equations use the 'generic' temperature and salinity sensitivity, and have a species specific pH sensitivity and intercept. You can use the temperature and salinity sensitivities from the species specific regressions by adding '_spc' to the end of the species name (i.e. 'grbw_spc', but as all of the species specific sensitivities are within error of the generic sensitivities, the only effect this really has is to increase the error in the final temperature estimate. The exception to this is 'grbw_gray2018' which always uses species specific regression coefficients. You may find 'gbul_spc' won't run because the errors are too large. \
+\
+
+\f0\b \
+\
+MgCaRB.pCO2()\
+
+\f1\b0 \
+MgCaRB.pCO2 requires the following parameters\
+species - this is a short name which determines which calibration to be used (see above)\
+age - age in ka BP (must be in the range -0.05 to 798 ka)\
+age_err - the 1 sigma uncertainty in ka (this assumes age error is normally distributed)\
+mgca - Mg/Ca ratio in mmol/mol\
+mgca_err - the Mg/Ca 1 sigma uncertainty in mmol/mol (2% of the Mg/Ca value is reasonable)\
+DpCO2 - modern ocean-atmosphere pCO2 offset in uatm (0 is equilibrium)\
+ALK - modern Alkalinity in umol/kg\
+S - modern salinity at the site in PSU \
+\
+If you're only interested in relative temperature changes arbitrary values for DpCO2, ALK and S can be given: DpCO2=0, ALK=2350, S=35.\
+\
+Here's an example:\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf2 MgCaRB.pCO2(\cf5 species\cf2 =\cf3 'grbw'\cf2 , \cf5 age\cf2 =\cf7 20\cf2 , \cf5 age_err\cf2 =\cf7 0.3\cf2 , \cf5 mgca\cf2 =\cf7 4\cf2 , \cf5 mgca_err\cf2 =\cf7 0.01\cf2 , \cf5 DpCO2\cf2 =\cf7 0\cf2 , \cf5 ALK\cf2 =\cf7 2350\cf2 , \cf5 S\cf2 =\cf7 35\cf2 )\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \
+\
+Here's an example using the artificial test data given. \
+First import the test data (this file can be used as a template):\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf5 dat\cf2 <- read.csv(\cf3 'testdata_pCO2.csv'\cf2 )
+\f1\fs24 \cf0  \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Then run the function (this may take a few minutes):\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf2 MgCaRB.pCO2(\cf5 species\cf2 =\cf3 'grbw'\cf2 , \cf5 age\cf2 =\cf5 dat\cf2 $\cf5 age\cf2 , \cf5 age_err\cf2 =\cf7 0.3\cf2 , \cf5 mgca\cf2 =\cf5 dat\cf2 $\cf5 mgca\cf2 , \cf5 mgca_err\cf2 =\cf7 0.01\cf2 *\cf5 dat\cf2 $\cf5 mgca\cf2 , \cf5 DpCO2\cf2 =\cf7 0\cf2 , \cf5 ALK\cf2 =\cf7 2350\cf2 , \cf5 S\cf2 =\cf7 35\cf2 )\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \
+\
+\
+\
+
+\f0\b MgCaRB.d11B()\
+
+\f1\b0 \
+MgCaRB.d11B requires the following parameters\
+species - this is a short name which determines which calibration to be used (see above)\
+age - age in ka BP (must be in the range -0.05 to 798 ka)\
+age_err - the 1 sigma uncertainty in ka (this assumes age error is normally distributed)\
+mgca - Mg/Ca ratio in mmol/mol\
+mgca_err - the Mg/Ca 1 sigma uncertainty in mmol/mol (2% of the Mg/Ca value is reasonable)\
+d11BOH4 - d11B, already converted to d11B of borate \
+d11BOH4_err - d11B 1 sigma uncertainty \
+S - modern salinity at the site in PSU \
+\
+\
+Here's an example:\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf2 MgCaRB.d11B(\cf5 species\cf2 =\cf3 'grbw'\cf2 , \cf5 age\cf2 =\cf7 20\cf2 , \cf5 age_err\cf2 =\cf7 0.3\cf2 , \cf5 mgca\cf2 =\cf7 4\cf2 , \cf5 mgca_err\cf2 =\cf7 0.01\cf2 , \cf5 d11BOH4\cf2 =\cf7 21.5\cf2 ,\cf5 d11BOH4_err\cf2 =\cf7 0.11\cf2 , \cf5 S\cf2 =\cf7 35\cf2 )\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \
+\
+Here's an example using the artificial test data given. \
+First import the test data (this file can be used as a template):\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf5 dat\cf2 <- read.csv(\cf3 'testdata_d11B.csv'\cf2 )
+\f1\fs24 \cf0 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 Then run the function (this may take a few minutes):\
+\pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
+
+\f2\fs19\fsmilli9750 \cf2 MgCaRB.d11B(\cf5 species\cf2 =\cf3 'grbw'\cf2 , \cf5 age\cf2 =\cf5 dat\cf2 $\cf5 age\cf2 , \cf5 age_err\cf2 =\cf7 0.3\cf2 , \cf5 mgca\cf2 =\cf5 dat\cf2 $\cf5 mgca\cf2 , \cf7 0.01\cf2 *\cf5 dat\cf2 $\cf5 mgca\cf2 , \cf5 d11BOH4\cf2 =\cf5 dat\cf2 $\cf5 d11BOH4\cf2 , \cf5 d11BOH4_err\cf2 =\cf7 0.11\cf2 ,  \cf5 S\cf2 =\cf7 35\cf2 )\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1\fs24 \cf0 \
+\
+\
+\
+\
+The citation for MgCaRB is Gray and Evans, 2019, Paleoceanography.\
+}
