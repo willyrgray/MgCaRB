@@ -1,5 +1,5 @@
 # MgCaRB
-MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity
+MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity.
 
 The key component of the MgCaRB script is that it iteratively solves Mg/Ca and either boron isotopes or atmospheric CO2 (using ice core data) for temperature and pH. 
 The function MgCaRB.pCO2 is used when using pCO2, and the function MgCaRB.d11B is used for boron isotopes. 
@@ -11,9 +11,9 @@ When using boron isotopes the uncertainty in the d11B of borate is given by the 
 When using CO2 the user is required to give the modern disequilibrium from atmospheric CO2 and Alkalinity at the site. 
 Uncertainty in ALK is prescribed as -25 to +75 umol/kg about the modern value, with a flat probability distribution; 
 this is equivalent to the whole ocean G-IG range in the box model of Toggweiler 1999, scaled to a surface ocean/whole ocean salinity increase of 0.7/1 PSU. 
-Error in DpCO2 is given as +40 uatm (2sigma). 
+Error in DpCO2 is given as ±40 uatm (2sigma). 
 Age error is accounted for when sampling the sea level curve or atmospheric CO2. 
-Sea level data comes from the stack of Spratt and Lisiecki 2016 which spans 798 ka. 
+Sea level data comes from the stack of Spratt and Lisiecki 2016 which spans the last 798 ka. 
 Ice core CO2 data is given on the AICC2012 timescale, except for the period oldest section (see Bereiter et al 2014). 
 The original references for the ice core data can be found in the icecoreCO2.csv file.  
 
