@@ -165,7 +165,7 @@ if(mean(ALK) < 99) {print('check ALK units!')} else {
 				#1
 				i<- i+1
 				#calculate pH1
-				pH1<- carb(flag=24, var1=pCO2j+DpCO2j, var2=ALKj, S=Sj, T=T0, pHscale='T', warn='n')$pH
+				pH1<- carb(flag=24, var1=pCO2j+DpCO2j, var2=ALKj, S=Sj, T=T0, pHscale='T', k1k2='l', warn='n')$pH
 			
 				#calculate T1
 				T1<- (1/tsens)*log(mgcaj/exp(ssens*(Sj-35)+pHsens*(pH1-8) + intercept))
@@ -174,7 +174,7 @@ if(mean(ALK) < 99) {print('check ALK units!')} else {
 				i<- i+1
 				#calculate pH2
 
-				pH2<- carb(flag=24, var1=pCO2j+DpCO2j, var2=ALKj, S=Sj, T=T1, pHscale='T', warn='n')$pH
+				pH2<- carb(flag=24, var1=pCO2j+DpCO2j, var2=ALKj, S=Sj, T=T1, pHscale='T', k1k2='l', warn='n')$pH
 	
 				#calculate T2
 				T2<- (1/tsens)*log(mgcaj/exp(ssens*(Sj-35)+pHsens*(pH2-8) + intercept))
