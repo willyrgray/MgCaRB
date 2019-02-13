@@ -24,7 +24,7 @@ As all of the species specific temperature and salinity sensitivities are all wi
 For species that have not been calibrated in culture a 'generic' calibration is available; 
 however this should only be used to look at relative temperature changes and given the effect of pH appears to be species specific, this calibration should only be used with caution.  
 
-The citation for MgCaRB is Gray and Evans, 2019, Paleoceanography.
+The citation for MgCaRBv1 is Gray and Evans, 2019, Paleoceanography and Paleoclimatology.
 
 A Matlab script is available from David Evans' GitHub page.
 
