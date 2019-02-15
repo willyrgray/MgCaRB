@@ -11,7 +11,7 @@
 \f0\b\fs24 \cf0 MgCaRBv1 QUICKSTART (using R) 
 \f1\b0 \
 \
-MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity. The correction for pH is made with either boron isotopes (if available) or atmospheric CO2. \
+MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity. The correction for pH is made with either boron isotopes (if available) or atmospheric CO2. A Matlab script is also available from https://github.com/dbjevans/MgCaRB.\
 \
 Open the file called 
 \f0\b MgCaRBv1.R 
@@ -22,6 +22,7 @@ You need to make sure you have the 'seacarb' package installed. To install run:
 \f1\fs24 \cf0 \
 This only needs to be done once. \
 \
+The files 'spratt2016_esl.csv' and 'icecoreCO2.csv must be in you working directory. \
 \
 At the start you need to load in two functions(the source code for these functions is given in the MgCaRB.pCO2.R and MgCaRB.d11B.R files):\
 \pard\tx468\tx936\tx1404\tx1872\tx2340\tx2808\tx3276\tx3744\tx4212\tx4680\tx5148\tx5617\tx6085\tx6553\tx7021\tx7489\tx7957\tx8425\tx8893\tx9361\tx9829\tx10297\tx10766\tx11234\tx11702\tx12170\tx12638\tx13106\tx13574\tx14042\tx14510\tx14978\tx15446\tx15915\tx16383\tx16851\tx17319\tx17787\tx18255\tx18723\tx19191\tx19659\tx20127\tx20595\tx21064\tx21532\tx22000\tx22468\tx22936\tx23404\tx23872\tx24340\tx24808\tx25276\tx25744\tx26213\tx26681\tx27149\tx27617\tx28085\tx28553\tx29021\tx29489\tx29957\li80\fi-80\pardirnatural\partightenfactor0
@@ -134,5 +135,5 @@ First import the test data (this file can be used as a template):\
 \
 \
 \
-The citation for MgCaRB is Gray and Evans, 2019, Paleoceanography.\
+The citation for MgCaRB is Gray and Evans, 2019, Paleoceanography and Paleoclimatology.\
 }
