@@ -26,7 +26,7 @@ however this should only be used to look at relative temperature changes and giv
 
 The citation for MgCaRBv1 is Gray and Evans, 2019, Paleoceanography and Paleoclimatology.
 
-A Matlab script is available from David Evans' GitHub page.
+A Matlab script is available from https://github.com/dbjevans/MgCaRB.
 
 
 References
