@@ -44,7 +44,7 @@ In both the pCO2 and d11B functions you need to specify which species calibratio
 'tsac' - T. sacculifer\
 'gbul' - G. bulloides\
 'ouni' - O. universa\
-'generic' - a generic equation\
+'generic' - a multi-species equation\
 'grbw_gray2018' - the Gray et al., 2018 G. ruber (white) equation\
 \
 The default equations use the 'generic' temperature and salinity sensitivity, and have a species specific pH sensitivity and intercept. You can use the temperature and salinity sensitivities from the species specific regressions by adding '_spc' to the end of the species name (i.e. 'grbw_spc', but as all of the species specific sensitivities are within error of the generic sensitivities, the only effect this really has is to increase the error in the final temperature estimate. The exception to this is 'grbw_gray2018' which always uses species specific regression coefficients. You may find 'gbul_spc' won't run because the errors are too large. \
