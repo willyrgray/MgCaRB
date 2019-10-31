@@ -1,5 +1,5 @@
 # MgCaRB
-MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity.
+MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, accounting for the influences of pH and salinity. When paired with boron isotopes this protocal can be used to generate more accurate reconstructions of pH and pCO2.
 
 To use, dowload the MgCaRB folder using the link above. Double click the 'MgCaRBv1.R' file to open it (you need to have R installed), and follow the instructions in the file.  
 A Matlab script is available from https://github.com/dbjevans/MgCaRB.
