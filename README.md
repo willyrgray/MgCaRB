@@ -3,6 +3,7 @@ MgCaRB is a tool to calculate temperature from planktic foraminiferal Mg/Ca, acc
 
 To use, dowload the MgCaRB folder using the link above. Double click the 'MgCaRBv1.R' file to open it (you need to have R installed), and follow the instructions in the file.  
 A Matlab script is available from https://github.com/dbjevans/MgCaRB.
+A web version (requiring no coding knowledge) is available from https://willyrgray.shinyapps.io/mgcarbv1/.
 
 The key component of the MgCaRB script is that it iteratively solves Mg/Ca and either boron isotopes or atmospheric CO2 (using ice core data) for temperature and pH. 
 The function MgCaRB.pCO2 is used when using pCO2, and the function MgCaRB.d11B is used for boron isotopes. 
